@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'nmax'
+
+size = Integer(ARGV[0])
+
+$stdout.puts Nmax::BignumsElector.elect(size, $stdin.to_i)

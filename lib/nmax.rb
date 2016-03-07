@@ -1,5 +1,5 @@
 require "nmax/version"
+require "nmax/bignums_elector"
 
 module Nmax
-  # Your code goes here...
 end

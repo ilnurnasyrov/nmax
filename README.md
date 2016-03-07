@@ -1,15 +1,13 @@
 # Nmax
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nmax`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+[![Build Status](https://travis-ci.org/ilnurnasyrov/nmax.svg?branch=master)](https://travis-ci.org/ilnurnasyrov/nmax)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'nmax'
+gem 'nmax', git: "git@github.com:ilnurnasyrov/nmax.git"
 ```
 
 And then execute:
@@ -18,11 +16,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install nmax
+    $ git clone git@github.com:ilnurnasyrov/nmax.git
+    $ cd nmax
+    $ bundle exec rake install
 
 ## Usage
-
-TODO: Write usage instructions here
+    $ cat sample.txt | nmax 3
+    or
+    $ echo '1 2 3 4' | nmax 3
 
 ## Development
 
@@ -32,5 +33,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nmax.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/ilnurnasyrov/nmax.

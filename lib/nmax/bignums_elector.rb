@@ -11,10 +11,8 @@ module Nmax
         left <=> right
       end.last(size)
 
-      output.puts result
+      output.puts(result)
       output.flush
-      output.close
-      input.close
     end
   end
 end

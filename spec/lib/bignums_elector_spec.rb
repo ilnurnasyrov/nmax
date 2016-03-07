@@ -23,8 +23,8 @@ describe Nmax::BignumsElector do
     end
 
     after do
-      input.unlink
-      output.unlink
+      input.close(true)
+      output.close(true)
     end
 
     it 'returns expected bignums' do

@@ -4,4 +4,8 @@ require 'nmax'
 
 size = Integer(ARGV[0])
 
-$stdout.puts Nmax::BignumsElector.elect(size, $stdin.to_i)
+Nmax::BignumsElector.elect(
+  size: size,
+  input_fd: $stdin.to_i,
+  output_fd: $stdout.to_i
+)

@@ -14,6 +14,11 @@ VALUE method_elect(VALUE self, VALUE size, VALUE input_fd, VALUE output_fd) {
   FILE *input = fdopen(NUM2INT(input_fd), "r");
   FILE *output = fdopen(NUM2INT(output_fd), "w");
 
+  if(NUM2INT(size) > 1024*1024) {
+    printf("Size is very big\n");
+    exit(0);
+  }
+
   Result result = result_init(NUM2INT(size));
 
   Bignum bignum = { .len = 0 };

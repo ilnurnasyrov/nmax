@@ -1,9 +1,7 @@
 #include <ruby.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 #include "bignums_elector.h"
-#include "result.h"
 
 VALUE BignumsElector = Qnil;
 
@@ -25,13 +23,13 @@ VALUE method_elect(VALUE self, VALUE size, VALUE input_fd, VALUE output_fd) {
   do {
     c = getc(input);
 
-    if('0' < c && c < '9' && bignum.len < BN_SIZE) {
+    if('0' <= c && c <= '9' && bignum.len < BN_SIZE) {
       bignum.digits[bignum.len++] = c;
     } else if(bignum.len > 0) {
       result_add(&result, &bignum);
       bignum_zerify(&bignum);
     }
-  } while(c != EOF);
+  } while (c != EOF);
 
   for(int i = 0; i < result.size; i++) {
     if(result.bignums[i].len) {
@@ -45,9 +43,6 @@ VALUE method_elect(VALUE self, VALUE size, VALUE input_fd, VALUE output_fd) {
 
   return size;
 }
-
-
-#include "result.h"
 
 Result result_init(int size) {
   Result result = { .min_index = 0, .size = size};
@@ -73,8 +68,8 @@ void result_add(Result *result, Bignum *bignum) {
 }
 
 void bignum_zerify(struct Bignum *bignum) {
+  memset(bignum->digits, 0, bignum->len);
   bignum->len = 0;
-  memset(bignum->digits, 0, BN_SIZE);
 }
 
 void bignum_copy(Bignum *target, Bignum *bignum) {

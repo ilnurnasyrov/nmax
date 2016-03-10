@@ -3,7 +3,7 @@ require 'tempfile'
 
 describe Nmax::BignumsElector do
   describe '.elect' do
-    let(:bignums) { %w(11 22 6 333 4) }
+    let(:bignums) { %w(101 22 6 3339 4) }
     let(:size) { 3 }
     let(:input) do
       Tempfile.new('input').tap do |tempfile|
@@ -24,7 +24,7 @@ describe Nmax::BignumsElector do
 
     it 'returns expected bignums' do
       File.open(output.path) do |f|
-        expect(f.read).to eq "11\n22\n333\n"
+        expect(f.read).to eq "101\n22\n3339\n"
       end
     end
   end

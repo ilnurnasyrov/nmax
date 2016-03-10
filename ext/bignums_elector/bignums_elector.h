@@ -2,18 +2,11 @@
 #define BIGNUM_ELECTOR_H
 
 #define BN_SIZE 1000
+#define BUFF_SIZE 1000000
 
 void Init_bignums_elector();
 
 VALUE method_elect(VALUE self, VALUE size, VALUE input_fd, VALUE output_fd);
-
-#endif
-
-#ifndef RESULT_H
-#define RESULT_H
-#define BN_SIZE 1000
-
-#include <stdbool.h>
 
 struct Bignum {
   char digits[BN_SIZE];

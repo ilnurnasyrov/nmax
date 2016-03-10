@@ -14,25 +14,32 @@ VALUE method_elect(VALUE self, VALUE size, VALUE input_fd, VALUE output_fd) {
   FILE *input = fdopen(NUM2INT(input_fd), "r");
   FILE *output = fdopen(NUM2INT(output_fd), "w");
 
+  if(NUM2INT(size) > 1024*1024) {
+    printf("Size is very big\n");
+    exit(0);
+  }
+
   Result result = result_init(NUM2INT(size));
 
   Bignum bignum = { .len = 0 };
   bignum_zerify(&bignum);
 
-  int c;
-  do {
-    c = getc(input);
-
-    if('0' <= c && c <= '9' && bignum.len < BN_SIZE) {
-      bignum.digits[bignum.len++] = c;
-    } else if(bignum.len > 0) {
-      result_add(&result, &bignum);
-      bignum_zerify(&bignum);
+  int bf_size = 1024 * 1024;
+  char *buffer = (char*)malloc(sizeof(char) * bf_size);
+  while(fgets(buffer, bf_size, input) != NULL) {
+    for(int i = 0; i < bf_size; i++) {
+      if('0' <= buffer[i] && buffer[i] <= '9' && bignum.len < BN_SIZE) {
+        bignum.digits[bignum.len++] = buffer[i];
+      } else if(bignum.len > 0) {
+        result_add(&result, &bignum);
+        bignum_zerify(&bignum);
+      }
     }
-  } while (c != EOF);
+  }
 
   for(int i = 0; i < result.size; i++) {
     if(result.bignums[i].len) {
+      result.bignums[i].digits[result.bignums[i].len] = 0;
       fprintf(output, "%s\n", result.bignums[i].digits);
     }
   }

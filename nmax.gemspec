@@ -22,7 +22,8 @@ Gem::Specification.new do |spec|
   end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
+  spec.bindir        = "bin"
+  spec.extensions    = ["ext/bignums_elector/extconf.rb"]
   spec.executables   = ["nmax"]
   spec.require_paths = ["lib"]
 

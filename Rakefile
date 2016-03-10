@@ -7,4 +7,5 @@ Rake::ExtensionTask.new("bignums_elector")
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task spec: "compile:bignums_elector"
+task default: :spec
